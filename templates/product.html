@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - Demo Retail</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Demo Retail</h1>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('cart') }}">Cart ({{ session.get('cart', [])|length }})</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        {% if product %}
+        <div class="product-detail">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+            <div class="product-info">
+                <h2>{{ product.name }}</h2>
+                <p class="category">{{ product.category }}</p>
+                <p class="price">${{ "%.2f"|format(product.price) }}</p>
+                <p class="description">{{ product.description }}</p>
+                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn">Add to Cart</a>
+                <a href="{{ url_for('index') }}" class="btn-secondary">Back to Shop</a>
+            </div>
+        </div>
+        {% else %}
+        <p>Product not found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
