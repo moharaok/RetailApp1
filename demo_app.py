@@ -56,7 +56,7 @@ def remove_from_cart(product_id):
 @app.route('/checkout')
 def checkout():
     session['cart'] = []
-    return render_template('checkout.html')
+    return render_template('checkout_PROD.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8500)
